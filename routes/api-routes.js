@@ -1,5 +1,7 @@
+// TODO: confirm these are working!
 const router = require("express").Router();
 const db = require("../models");
+
 
 router.get("/api/config", (req, res) => {
   res.json({
@@ -7,7 +9,7 @@ router.get("/api/config", (req, res) => {
   });
 });
 
-router.get("/api/workout", (req, res) => {
+router.get("/api/workouts", (req, res) => {
   db.Workout.find()
     .then((foundWorkouts) => {
       res.json(foundWorkouts);
@@ -17,15 +19,13 @@ router.get("/api/workout", (req, res) => {
     });
 });
 
-router.get("/api/workout/:id", (req, res) => {
-  for (let i = 0; i <= workout.length; i++) {
-    if (workout[i].name === req.params.id) {
-      return res.json(workout[i]);
-    }
-  }
+router.get("/api/workouts/:id", (req, res) => {
+  db.Workout.findById(req.params.id).then((foundWorkouts) => {
+    res.json(foundWorkouts);
+  });
 });
 
-router.post("/api/workout", (req, res) => {
+router.post("/api/workouts", (req, res) => {
   db.Workout.create(req.body)
     .then((newWorkout) => {
       res.json(newWorkout);
@@ -35,7 +35,7 @@ router.post("/api/workout", (req, res) => {
     });
 });
 
-router.put("/api/workout/:id", (req, res) => {
+router.put("/api/workouts/:id", (req, res) => {
   db.Workout.findByIdAndUpdate(req.params.id, req.body, { new: true }).then(
     (updateWorkout) => {
       res.json(updateWorkout);
@@ -43,7 +43,7 @@ router.put("/api/workout/:id", (req, res) => {
   );
 });
 
-router.delete("/api/Workout/:id", (req, res) => {
+router.delete("/api/workouts/:id", (req, res) => {
   db.Workout.findByIdAndDelete(req.params.id).then((results) => {
     res.json(results);
   });
