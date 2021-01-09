@@ -57,7 +57,7 @@ router.get("/api/workouts/range", (req, res) => {
 
 // Create a new workout
 router.post("/api/workouts", ({ body }, res) => {
-  db.Workout.create(req.body)
+  db.Workout.create({}})
     .then((newWorkout) => {
       res.json(newWorkout);
     })
