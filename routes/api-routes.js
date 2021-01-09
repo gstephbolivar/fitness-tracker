@@ -2,11 +2,6 @@
 const router = require("express").Router();
 const db = require("../models");
 
-// router.get("/api/config", (req, res) => {
-//   res.json({
-//     success: true,
-//   });
-// });
 
 // Aggregate function to add totalDuration
 router.get("/api/workouts", (req, res) => {
@@ -24,17 +19,6 @@ router.get("/api/workouts", (req, res) => {
       res.status(400).json(err);
     });
 });
-
-// Route to find a workout
-// router.get("/api/workouts/:id", (req, res) => {
-//   db.Workout.findById(req.params.id)
-//     .then((foundWorkouts) => {
-//       res.json(foundWorkouts);
-//     })
-//     .catch((err) => {
-//       res.status(400).json(err);
-//     });
-// });
 
 // Route to add sort
 router.get("/api/workouts/range", (req, res) => {
